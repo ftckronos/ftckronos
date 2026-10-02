@@ -58,7 +58,7 @@ export const site = {
       'FTC emphasizes Gracious Professionalism, teamwork, and community outreach alongside technical achievement.',
   },
   contact: {
-    email: 'contact@ftckronos.com',
+    email: 'ftckronos@gmail.com',
     note:
       'Team communication for members and parents is handled through Discord and WhatsApp. For public inquiries, email is best.',
     links: [] as { label: string; href: string }[],
