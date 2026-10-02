@@ -1,5 +1,6 @@
 ---
 import type { CollectionEntry } from 'astro:content';
+import { withBase } from '../utils/url';
 
 interface Props {
   posts: CollectionEntry<'outreach'>[];
@@ -23,10 +24,10 @@ function formatDate(date: Date) {
         <article class="post-card">
           <time datetime={post.data.pubDate.toISOString()}>{formatDate(post.data.pubDate)}</time>
           <h2>
-            <a href={`/outreach/${post.id}`}>{post.data.title}</a>
+            <a href={withBase(`/outreach/${post.id}`)}>{post.data.title}</a>
           </h2>
           <p>{post.data.description}</p>
-          <a class="post-card__link" href={`/outreach/${post.id}`}>Read more</a>
+          <a class="post-card__link" href={withBase(`/outreach/${post.id}`)}>Read more</a>
         </article>
       </li>
     ))

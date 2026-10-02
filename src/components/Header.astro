@@ -1,35 +1,36 @@
 ---
 import { site } from '../data/site';
+import { withBase } from '../utils/url';
 
 const nav = [
-  { href: '/#about', label: 'About' },
-  { href: '/#mission', label: 'Mission' },
-  { href: '/#team', label: 'Team' },
-  { href: '/#subteams', label: 'Sub-teams' },
-  { href: '/#ftc', label: 'FTC' },
-  { href: '/outreach', label: 'Outreach' },
-  { href: '/#awards', label: 'Awards' },
-  { href: '/#join', label: 'Join' },
-  { href: '/#contact', label: 'Contact' },
+  { path: '/#about', label: 'About' },
+  { path: '/#mission', label: 'Mission' },
+  { path: '/#team', label: 'Team' },
+  { path: '/#subteams', label: 'Sub-teams' },
+  { path: '/#ftc', label: 'FTC' },
+  { path: '/outreach', label: 'Outreach' },
+  { path: '/#awards', label: 'Awards' },
+  { path: '/#join', label: 'Join' },
+  { path: '/#contact', label: 'Contact' },
 ];
 ---
 
 <header class="header">
   <div class="container header__inner">
-    <a class="header__brand" href="/">
+    <a class="header__brand" href={withBase('/')}>
       <span class="header__name">{site.name}</span>
       <span class="header__num">#{site.teamNumber}</span>
     </a>
     <nav class="header__nav" aria-label="Main">
       {nav.map((item) => (
-        <a href={item.href}>{item.label}</a>
+        <a href={withBase(item.path)}>{item.label}</a>
       ))}
     </nav>
     <details class="header__menu">
       <summary aria-label="Open menu">Menu</summary>
       <nav class="header__dropdown" aria-label="Mobile">
         {nav.map((item) => (
-          <a href={item.href}>{item.label}</a>
+          <a href={withBase(item.path)}>{item.label}</a>
         ))}
       </nav>
     </details>

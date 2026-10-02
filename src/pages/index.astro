@@ -6,6 +6,7 @@ import { site } from '../data/site';
 import { captains, leads, subteams } from '../data/team';
 import { awards } from '../data/awards';
 import { sponsors } from '../data/sponsors';
+import { withBase } from '../utils/url';
 ---
 
 <BaseLayout>
@@ -16,7 +17,7 @@ import { sponsors } from '../data/sponsors';
       <p class="hero__tagline">{site.tagline}</p>
       <div class="hero__actions">
         <a class="btn" href="#join">Join us</a>
-        <a class="btn btn--ghost" href="/outreach">Outreach</a>
+        <a class="btn btn--ghost" href={withBase('/outreach')}>Outreach</a>
       </div>
     </div>
   </section>
@@ -145,7 +146,7 @@ import { sponsors } from '../data/sponsors';
       )
     }
     <p>
-      <a class="btn btn--ghost" href="/outreach">Read outreach updates</a>
+      <a class="btn btn--ghost" href={withBase('/outreach')}>Read outreach updates</a>
     </p>
   </Section>
 </BaseLayout>
