@@ -1,0 +1,220 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Section from '../components/Section.astro';
+import TeamCard from '../components/TeamCard.astro';
+import { site } from '../data/site';
+import { captains, leads, subteams } from '../data/team';
+import { awards } from '../data/awards';
+import { sponsors } from '../data/sponsors';
+---
+
+<BaseLayout>
+  <section id="home" class="hero">
+    <div class="container hero__inner">
+      <p class="hero__eyebrow">FIRST Tech Challenge · {site.season}</p>
+      <h1>{site.name}</h1>
+      <p class="hero__tagline">{site.tagline}</p>
+      <div class="hero__actions">
+        <a class="btn" href="#join">Join us</a>
+        <a class="btn btn--ghost" href="/outreach">Outreach</a>
+      </div>
+    </div>
+  </section>
+
+  <Section id="about" title="About us" lead={`Founded in ${site.foundedYear} · ${site.school}`}>
+    {site.about.map((paragraph) => <p>{paragraph}</p>)}
+    <ul class="about-facts">
+      <li>Team #{site.teamNumber}</li>
+      <li>{site.location}</li>
+      <li>Rookie season: {site.foundedYear}</li>
+    </ul>
+  </Section>
+
+  <Section id="mission" title="Our mission" alt>
+    {site.mission.map((paragraph) => <p>{paragraph}</p>)}
+  </Section>
+
+  <Section id="team" title="Leadership">
+    <p class="section__lead">Captains and sub-team leads for the {site.season} season.</p>
+    <h3 class="team-group-title">Captains</h3>
+    <div class="card-grid card-grid--3 team-grid">
+      {captains.map((member) => (
+        <TeamCard name={member.name} role={member.role} />
+      ))}
+    </div>
+    <h3 class="team-group-title">Leads</h3>
+    <div class="card-grid card-grid--3 team-grid">
+      {leads.map((member) => (
+        <TeamCard name={member.name} role={member.role} />
+      ))}
+    </div>
+  </Section>
+
+  <Section id="subteams" title="Sub-teams" alt lead="Members specialize in one or more areas across the season.">
+    <div class="card-grid card-grid--3">
+      {subteams.map((sub) => (
+        <article class="card card--surface">
+          <h3>{sub.name}</h3>
+          <ul>
+            {sub.overview.map((item) => <li>{item}</li>)}
+          </ul>
+        </article>
+      ))}
+    </div>
+  </Section>
+
+  <Section id="ftc" title="What is FTC?">
+    <p>{site.ftc.intro}</p>
+    <div class="card-grid card-grid--3 ftc-levels">
+      {site.ftc.levels.map((level) => (
+        <article class="card">
+          <h3>{level.name}</h3>
+          <p class="ftc-level-label">{level.label}</p>
+          <p>{level.description}</p>
+        </article>
+      ))}
+    </div>
+    <p>{site.ftc.season}</p>
+    <p>{site.ftc.values}</p>
+  </Section>
+
+  <Section id="awards" title="Awards & competitions" alt lead="Highlights from official FIRST events.">
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Year</th>
+            <th>Event</th>
+            <th>Award</th>
+          </tr>
+        </thead>
+        <tbody>
+          {awards.map((row) => (
+            <tr>
+              <td>{row.year}</td>
+              <td>{row.event}</td>
+              <td>{row.award}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </Section>
+
+  <Section id="join" title="Join the team">
+    <p>{site.meetings.summary}</p>
+    <ul>
+      {site.meetings.slots.map((slot) => <li>{slot}</li>)}
+    </ul>
+    <p class="join-note">{site.meetings.note}</p>
+    <h3>Expectations</h3>
+    <ul>
+      {site.join.map((item) => <li>{item}</li>)}
+    </ul>
+    <p>
+      Interested? Reach out via <a href={`mailto:${site.contact.email}`}>{site.contact.email}</a> or
+      the <a href="#contact">contact section</a> below.
+    </p>
+  </Section>
+
+  <Section id="sponsors" title="Sponsors & supporters" alt>
+    <div class="card-grid card-grid--3">
+      {sponsors.map((s) => (
+        <article class="card">
+          <h3>{s.name}</h3>
+          <p>{s.description}</p>
+        </article>
+      ))}
+    </div>
+  </Section>
+
+  <Section id="contact" title="Contact">
+    <p>
+      Email: <a href={`mailto:${site.contact.email}`}>{site.contact.email}</a>
+    </p>
+    <p>{site.contact.note}</p>
+    {
+      site.contact.links.length > 0 && (
+        <ul>
+          {site.contact.links.map((link) => (
+            <li>
+              <a href={link.href} rel="noopener noreferrer" target="_blank">{link.label}</a>
+            </li>
+          ))}
+        </ul>
+      )
+    }
+    <p>
+      <a class="btn btn--ghost" href="/outreach">Read outreach updates</a>
+    </p>
+  </Section>
+</BaseLayout>
+
+<style>
+  .hero {
+    padding: 5rem 0 4.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .hero__inner {
+    max-width: 40rem;
+  }
+
+  .hero__eyebrow {
+    margin: 0 0 0.75rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+
+  .hero__tagline {
+    font-size: 1.125rem;
+    color: var(--text-muted);
+    margin-bottom: 1.75rem;
+  }
+
+  .hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  .about-facts {
+    margin-top: 1.5rem;
+    color: var(--text-muted);
+  }
+
+  .team-group-title {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-muted);
+  }
+
+  .team-group-title:not(:first-of-type) {
+    margin-top: 2rem;
+  }
+
+  .team-grid {
+    margin-bottom: 0.5rem;
+  }
+
+  .ftc-level-label {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    margin-bottom: 0.5rem;
+  }
+
+  .ftc-levels p:last-child {
+    margin-bottom: 0;
+  }
+
+  .join-note {
+    color: var(--text-muted);
+    font-size: 0.9375rem;
+  }
+</style>

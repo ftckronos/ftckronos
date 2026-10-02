@@ -1,0 +1,46 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PostList from '../../components/PostList.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('outreach')).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
+---
+
+<BaseLayout title="Outreach" description="Community outreach and events from FTC Kronos.">
+  <section class="page-header">
+    <div class="container">
+      <p class="page-header__back"><a href="/">← Home</a></p>
+      <h1>Outreach</h1>
+      <p class="page-header__lead">
+        Updates from workshops, demos, and community events. New posts are added as markdown files in
+        the repository.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      {posts.length > 0 ? <PostList posts={posts} /> : <p>No posts yet.</p>}
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-header {
+    padding: 3rem 0 1rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .page-header__back {
+    margin: 0 0 1rem;
+    font-size: 0.875rem;
+  }
+
+  .page-header__lead {
+    max-width: 40rem;
+    color: var(--text-muted);
+    margin: 0;
+  }
+</style>

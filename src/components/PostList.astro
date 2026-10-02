@@ -1,0 +1,81 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  posts: CollectionEntry<'outreach'>[];
+}
+
+const { posts } = Astro.props;
+
+function formatDate(date: Date) {
+  return date.toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  });
+}
+---
+
+<ul class="post-list">
+  {
+    posts.map((post) => (
+      <li>
+        <article class="post-card">
+          <time datetime={post.data.pubDate.toISOString()}>{formatDate(post.data.pubDate)}</time>
+          <h2>
+            <a href={`/outreach/${post.id}`}>{post.data.title}</a>
+          </h2>
+          <p>{post.data.description}</p>
+          <a class="post-card__link" href={`/outreach/${post.id}`}>Read more</a>
+        </article>
+      </li>
+    ))
+  }
+</ul>
+
+<style>
+  .post-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .post-card {
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 1.5rem;
+    background: var(--surface);
+  }
+
+  .post-card time {
+    font-size: 0.8125rem;
+    color: var(--text-muted);
+  }
+
+  .post-card h2 {
+    margin: 0.35rem 0 0.5rem;
+    font-size: 1.25rem;
+  }
+
+  .post-card h2 a {
+    color: var(--text);
+    text-decoration: none;
+  }
+
+  .post-card h2 a:hover {
+    color: var(--accent);
+  }
+
+  .post-card p {
+    color: var(--text-muted);
+    font-size: 0.9375rem;
+  }
+
+  .post-card__link {
+    font-size: 0.875rem;
+    font-weight: 500;
+  }
+</style>
