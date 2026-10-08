@@ -1,7 +1,6 @@
 export const site = {
   name: 'FTC Kronos',
   teamNumber: 20791,
-  school: 'Evergreen Valley High School',
   location: 'San Jose, CA',
   foundedYear: 2021,
   season: '2026–2027',
@@ -15,22 +14,7 @@ export const site = {
     'We practice Gracious Professionalism: competing hard while treating others with respect and helping our community grow in STEM.',
     'Our mission is to design and build competitive robots, develop real engineering skills across mechanical and software work, and inspire younger students through hands-on outreach.',
   ],
-  meetings: {
-    summary: 'Three meetings per week during the season.',
-    slots: [
-      'Monday & Thursday, 4:30–6:30 PM',
-      'Saturday or Sunday, 2:00–5:00 PM (sub-team schedule)',
-    ],
-    note:
-      'Members are expected at at least two-thirds of meetings each week. If you cannot attend, notify your sub-team lead in advance.',
-  },
-  join: [
-    'Attend at least two-thirds of weekly meetings unless your sub-team cancels.',
-    'You may contribute to more than one sub-team if you can balance the workload.',
-    'Plan for about two competitions per season, typically in December and January.',
-    'Participate in team fundraisers and outreach events throughout the year.',
-    'Help keep the workspace positive, organized, and collaborative.',
-  ],
+
   ftc: {
     intro:
       'FIRST Tech Challenge (FTC) is a robotics competition for students in grades 7–12. Teams design, build, and program robots to complete a new game each season.',

@@ -15,13 +15,10 @@ import { withBase } from '../utils/url';
       <p class="hero__eyebrow">FIRST Tech Challenge · {site.season}</p>
       <h1>{site.name}</h1>
       <p class="hero__tagline">{site.tagline}</p>
-      <div class="hero__actions">
-        <a class="btn" href="#join">Join us</a>
-      </div>
     </div>
   </section>
 
-  <Section id="about" title="About us" lead={`Founded in ${site.foundedYear} · ${site.school}`}>
+  <Section id="about" title="About us" lead={`Founded in ${site.foundedYear} · ${site.location}`}>
     {site.about.map((paragraph) => <p>{paragraph}</p>)}
     <ul class="about-facts">
       <li>Team #{site.teamNumber}</li>
@@ -101,22 +98,6 @@ import { withBase } from '../utils/url';
     </div>
   </Section>
 
-  <Section id="join" title="Join the team">
-    <p>{site.meetings.summary}</p>
-    <ul>
-      {site.meetings.slots.map((slot) => <li>{slot}</li>)}
-    </ul>
-    <p class="join-note">{site.meetings.note}</p>
-    <h3>Expectations</h3>
-    <ul>
-      {site.join.map((item) => <li>{item}</li>)}
-    </ul>
-    <p>
-      Interested? Reach out via <a href={`mailto:${site.contact.email}`}>{site.contact.email}</a> or
-      the <a href="#contact">contact section</a> below.
-    </p>
-  </Section>
-
   <Section id="sponsors" title="Sponsors & supporters" alt>
     <div class="card-grid card-grid--3">
       {sponsors.map((s) => (
@@ -169,13 +150,7 @@ import { withBase } from '../utils/url';
   .hero__tagline {
     font-size: 1.125rem;
     color: var(--text-muted);
-    margin-bottom: 1.75rem;
-  }
-
-  .hero__actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.75rem;
+    margin-bottom: 0;
   }
 
   .about-facts {
@@ -208,10 +183,5 @@ import { withBase } from '../utils/url';
 
   .ftc-levels p:last-child {
     margin-bottom: 0;
-  }
-
-  .join-note {
-    color: var(--text-muted);
-    font-size: 0.9375rem;
   }
 </style>
