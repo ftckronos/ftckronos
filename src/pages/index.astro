@@ -2,7 +2,6 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Section from '../components/Section.astro';
 import { site } from '../data/site';
-import { sponsors } from '../data/sponsors';
 ---
 
 <BaseLayout>
@@ -21,32 +20,6 @@ import { sponsors } from '../data/sponsors';
       <li>{site.location}</li>
       <li>Rookie season: {site.foundedYear}</li>
     </ul>
-  </Section>
-
-  <Section id="ftc" title="What is FTC?" alt>
-    <p>{site.ftc.intro}</p>
-    <div class="card-grid card-grid--3 ftc-levels">
-      {site.ftc.levels.map((level) => (
-        <article class="card">
-          <h3>{level.name}</h3>
-          <p class="ftc-level-label">{level.label}</p>
-          <p>{level.description}</p>
-        </article>
-      ))}
-    </div>
-    <p>{site.ftc.season}</p>
-    <p>{site.ftc.values}</p>
-  </Section>
-
-  <Section id="sponsors" title="Sponsors & supporters">
-    <div class="card-grid card-grid--3">
-      {sponsors.map((s) => (
-        <article class="card">
-          <h3>{s.name}</h3>
-          <p>{s.description}</p>
-        </article>
-      ))}
-    </div>
   </Section>
 </BaseLayout>
 
@@ -78,15 +51,5 @@ import { sponsors } from '../data/sponsors';
   .about-facts {
     margin-top: 1.5rem;
     color: var(--text-muted);
-  }
-
-  .ftc-level-label {
-    font-size: 0.875rem;
-    color: var(--text-muted);
-    margin-bottom: 0.5rem;
-  }
-
-  .ftc-levels p:last-child {
-    margin-bottom: 0;
   }
 </style>
