@@ -2,14 +2,27 @@
 import { site } from '../data/site';
 import { withBase } from '../utils/url';
 
+const pathname = Astro.url.pathname;
+
 const nav = [
   { path: '/', label: 'Home' },
-  { path: '/mission', label: 'Mission' },
-  { path: '/team', label: 'Team' },
-  { path: '/outreach', label: 'Outreach' },
-  { path: '/awards', label: 'Awards' },
-  { path: '/contact', label: 'Contact' },
+  { path: '/mission/', label: 'Mission' },
+  { path: '/team/', label: 'Team' },
+  { path: '/outreach/', label: 'Outreach' },
+  { path: '/awards/', label: 'Awards' },
+  { path: '/contact/', label: 'Contact' },
 ];
+
+function isItemActive(itemPath: string) {
+  const fullTarget = withBase(itemPath);
+  const cleanPath = pathname.replace(/\/$/, '');
+  const cleanTarget = fullTarget.replace(/\/$/, '');
+
+  if (itemPath === '/') {
+    return cleanPath === cleanTarget || cleanPath === '';
+  }
+  return cleanPath === cleanTarget || cleanPath.startsWith(`${cleanTarget}/`);
+}
 ---
 
 <header class="header">
@@ -19,16 +32,34 @@ const nav = [
       <span class="header__num">#{site.teamNumber}</span>
     </a>
     <nav class="header__nav" aria-label="Main">
-      {nav.map((item) => (
-        <a href={withBase(item.path)}>{item.label}</a>
-      ))}
+      {nav.map((item) => {
+        const active = isItemActive(item.path);
+        return (
+          <a
+            href={withBase(item.path)}
+            class:list={[{ 'header__nav--active': active }]}
+            aria-current={active ? 'page' : undefined}
+          >
+            {item.label}
+          </a>
+        );
+      })}
     </nav>
     <details class="header__menu">
       <summary aria-label="Open menu">Menu</summary>
       <nav class="header__dropdown" aria-label="Mobile">
-        {nav.map((item) => (
-          <a href={withBase(item.path)}>{item.label}</a>
-        ))}
+        {nav.map((item) => {
+          const active = isItemActive(item.path);
+          return (
+            <a
+              href={withBase(item.path)}
+              class:list={[{ 'header__nav--active': active }]}
+              aria-current={active ? 'page' : undefined}
+            >
+              {item.label}
+            </a>
+          );
+        })}
       </nav>
     </details>
   </div>
@@ -87,10 +118,13 @@ const nav = [
     font-size: 0.875rem;
     color: var(--text-muted);
     text-decoration: none;
+    transition: color 0.15s ease;
   }
 
-  .header__nav a:hover {
+  .header__nav a:hover,
+  .header__nav a.header__nav--active {
     color: var(--text);
+    font-weight: 500;
   }
 
   .header__menu {
@@ -134,9 +168,11 @@ const nav = [
     border-radius: 4px;
   }
 
-  .header__dropdown a:hover {
+  .header__dropdown a:hover,
+  .header__dropdown a.header__nav--active {
     background: var(--bg);
     color: var(--text);
+    font-weight: 500;
   }
 
   @media (min-width: 900px) {

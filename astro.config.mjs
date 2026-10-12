@@ -17,4 +17,5 @@ const site =
 export default defineConfig({
   site,
   base,
+  trailingSlash: 'always',
 });
